@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/static/images/bg_1.jpg');">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate pb-5 text-center">
+       <p class="breadcrumbs"><span class="mr-2"><a href={% url 'index' %}>Home <i class="fa fa-chevron-right"></i></a></span> <span>Your Destination <i class="fa fa-chevron-right"></i></span></p>
+
+         <h1 class="mb-0 bread "><span class="p-3" >Your Destination</span></h1>
+     </div>
+ </div>
+</div>
+</section>
+
+<section class="ftco-section ftco-no-pb bg-dark" >
+   <div class="container">
+      <div class="row" >
+       <div class="col-md-12" >
+          <div class="search-wrap-1 ftco-animate">
+             <form method='POST' class="search-property-1" >
+              {% csrf_token %}
+                <div class="row no-gutters">
+                   <div class="col-lg-4 d-flex">
+                      <div class="form-group p-4 border-0">
+                         <label for="#" >State</label>
+                         <div class="form-field">
+                          <div class="icon"><span class="fa fa-chevron-down"></span></div>
+                          <select name="state" id="" class="form-control ">
+                            {% if productdata %}
+                            <option value="">{{p}}</option>
+                            {% else %}
+                            <option value="">select</option>
+                            {% endif %}
+                            {% for i in statelist %}
+                            <option value="{{i}}">{{i}}</option>
+                            {% endfor %}
+                          </select>
+                          </div>
+                   </div>
+               </div>
+               <div class="col-lg-4 d-flex">
+                  <div class="form-group p-4">
+                     <label for="#">City</label>
+                     <div class="form-field">
+                      <div class="icon"><span class="fa fa-chevron-down"></span></div>
+                      <select name="city" id="" class="form-control">
+                        {% if productdata %}
+                        <option value="">{{q}}</option>
+                        {% else %}
+                        <option value="">select</option>
+                        {% endif %}
+                        {% for i in citylist %}
+
+                            <option value="{{i}}">{{i}}</option>
+                
+                            {% endfor %}
+                      </select>
+                   </div>
+               </div>
+           </div>
+       <div class="col-lg-4 d-flex">
+        <div class="form-group p-4">
+          <label for="#">Place</label>
+          <div class="form-field">
+            <div class="select-wrap">
+              <div class="icon"><span class="fa fa-chevron-down"></span></div>
+              <select name="place" id="" class="form-control">
+                {% if productdata %}
+                <option value="">{{r}}</option>
+                {% else %}
+                <option value="">select</option>
+                {% endif %}
+                {% for i in placelist %}
+                  <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </div>
+</div>
+<div class="col-lg d-flex">
+  <div class="form-group d-flex w-100 border-0 mt-5">
+     <div class="form-field w-100 align-items-center d-flex">
+        <input type="submit" value="Search" class="align-self-stretch form-control btn btn-primary">
+    </div>
+</section>
+</form>
+{% if productdata %}
+<section class="ftco-section">
+    <div class="container">
+     <div class="row">
+      {% for i in productdata %}
+      <div class="col-md-4 ftco-animate">
+       <div class="project-wrap hotel">
+        <a href={% url 'singlehotel' i.id %} class="img" style="background-image: url({{i.productImage1.url}});">
+         <span class="price">Rs.{{i.price}}/person</span>
+       </a>
+       <div class="text p-4">
+        
+        <span class="days">Open time:{{i.opentime}}</span><br>
+        <span class="days">Close time:{{i.closetime}}</span>
+  
+        <h3><a href="#">{{i.place_name}}</a></h3>
+  
+         <p class="location"><span class="fa fa-map-marker"></span>{{i.city}}, {{i.state}}</p>
+         
+      </div>
+    </div>
+   </div>
+   {% endfor %}
+
+   </div>
+   </div>
+   </section>
+   {% endif %}
+   
+   
+   <section class="ftco-intro ftco-section ftco-no-pt">
+    <div class="container">
+     <div class="row justify-content-center">
+      <div class="col-md-12 text-center">
+       <div class="img"  style="background-image: url(/static/images/bg_2.jpg);">
+        <div class="overlay"></div>
+        <h2>We Are Pacific A Travel Agency</h2>
+        <p>We can manage your dream building A small river named Duden flows by their place</p>
+        
+      </div>
+    </div>
+   </div>
+   </div>
+   </section>
+   
+   
+{% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        p{
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* width: 100%; */
+            font-family: system-ui;
+            font-weight: bold;
+            font-size: 30px;
+            background-color: lightgreen;
+            padding: 16px 50px;
+            border-radius: 48px;
+        }
+        a{
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 25px;
+            background-color: lightgreen;
+            font-family: system-ui;
+            font-weight: bold;
+            padding: 15px 30px;
+            color: black;
+            border-radius: 40px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>Hooray Hotel Booked Successfully 🥳🥳</p>
+        <a href="{% url "index" %}">Back to Home </a>
+    </div>
+    
+</body>
+</html>

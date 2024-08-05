@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<section class="single" style="background-color: yellowgreen">
+    <div class="overlay">
+    <div class="container">
+        <div class="inner-content">
+            <br>
+            <br>
+            <br>
+            <div class="banner">
+                <div class="container">
+                
+                  <div class="row">
+                      <div class="col-sm-12"><h1>{{ hoteldata.place_name }}</h1></div>
+                  </div>
+                </div>
+            </div>
+            <div class="row bg-dark p-5 rounded" >
+            <div class="col-sm-12 col-md-12  " data-aos="fade-up">
+            <div class="row justify-content-center">
+                <a href= "images/hotel-resto-1.jpg" class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12 mt-3 p-0 m-0 mr-3   " style="border: 2px solid lightgray;">
+                    <img src= {{ hoteldata.productImage1.url }}  width="100%" height="300px">
+                </a>
+                <a href="images/hotel-resto-2.jpg" class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12 mt-3 p-0 m-0 mr-3   " style="border: 2px solid lightgray;">
+                    <img src= {{ hoteldata.productImage2.url }}  width="100%" height="300px">
+                </a>
+                <a href="images/hotel-resto-3.jpg" class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12 mt-3 p-0 m-0 mr-3   " style="border: 2px solid lightgray;">
+                    <img src= {{ hoteldata.productImage3.url }}  width="100%" height="300px">
+                </a>
+                <a href="images/hotel-resto-4.jpg" class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12 mt-3 p-0 m-0 mr-3   " style="border: 2px solid lightgray;">
+                    <img src= {{ hoteldata.productImage4.url }}  width="100%" height="300px">
+                </a>
+            </div>
+            </div>
+            <div class="col-sm-12 col-md-12 mt-5 " style="color: whitesmoke;">
+                <p class="myp text-justify" >
+                    {{ hoteldata.description }}
+                </p>
+            <div class="row myrow" >
+            <div class="col-sm-12"  data-aos="fade-up" data-aos-duration="1000">
+                <ul>
+                    <li class="mylist" style="color: whitesmoke;">
+                        <span class="myspan">PRICE:</span>
+                        <span class="myspan" >{{ hoteldata.price }}</span>
+                    </li>
+                </ul>
+            </div>
+            {% if sessionuser %}
+                <div class="col-sm-12">
+
+                <div class="cart">
+                    <form method='POST' action="{% url 'paymentofbooking' %}" >
+                        {% csrf_token %}
+                        
+                        <input type="hidden" value="{{ hoteldata.vendorId }}" name='vendorid'>
+                        <input type="hidden" value="{{ hoteldata.id }}" name='hotelid'>
+                        <input type="text" placeholder="no of person"  name='noofperson'>
+                        <input type="hidden" value="{{ hoteldata.place_name }}" name='hotel_name'>
+                        <input type="date"  name='cheackin'>
+                        <input type="hidden" value="{{ hoteldata.price }}" name='Amount'>
+                        <input type="date"  name='cheackout'>
+                      <button
+                        type="submit"
+                        class="btn btn-outline-success " role="button"
+                        name="submit"
+                        value="buy">
+                        Payment
+                      </button>
+                    </form>
+                   
+                </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</section>
+  
+    
+
+<!-- include footer here -->
+
+<!-- footer end -->
+<script src={% static 'js/google-map.js' %}></script>
+			<script src={% static 'js/main.js' %}></script>
+
+{% endblock %}
